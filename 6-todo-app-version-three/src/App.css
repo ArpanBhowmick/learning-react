@@ -1,0 +1,27 @@
+
+
+
+input {
+    width: 100%;
+}
+
+.items-containers{
+    text-align: left;
+}
+
+.kg-button{
+    min-width: 80px;
+}
+
+div.kg-row {   /* have to be specific, div → an element selector and .custom-row → a class selectorSo its specificity score is:
+0, 0, 1, 1 . div.custom-row has a higher specificity than .row  Browser says: Hey, this one’s more specific. I’ll go with the 10px 5px margin instead of Bootstrap’s*/
+    margin: 10px 5px;
+}
+
+.msg {
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
