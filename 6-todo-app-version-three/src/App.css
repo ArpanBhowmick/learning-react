@@ -1,4 +1,4 @@
-html {
+html, body {
     background-color: rgba(0, 0, 0, 0.884);
 }
 
@@ -15,6 +15,7 @@ input {
 
 .kg-button{
     min-width: 109px;
+    margin-right: 10px;
 }
 
 div.kg-row {   /* have to be specific, div → an element selector and .custom-row → a class selectorSo its specificity score is:
