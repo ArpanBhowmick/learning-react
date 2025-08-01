@@ -2,8 +2,8 @@
   background-color: rgb(53, 53, 53);
   border: 2px solid black;
   height: auto;
-  width: 80%;
-  min-width: 280px;
+  width: 90%;
+  /* min-width: 280px; */
   max-width: 900px;
   border-radius: 5px;
 
