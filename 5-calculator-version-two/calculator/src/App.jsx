@@ -4,38 +4,29 @@ import styles from "./App.module.css";
 import { useState } from "react";
 
 function App() {
-  let [ButtonNames, setAllButtons] = useState([
-    "C",
-    "1",
-    "2",
-    "+",
-    "3",
-    "4",
-    "-",
-    "5",
-    "6",
-    "*",
-    "7",
-    "8",
-    "/",
-    "=",
-    "9",
-    "0",
-    ".",
-  ]);
+  const [calVal, setcalVal] = useState("");
 
-  const onButtonClick = () => {
-    for (let ButtonNames of button) {
-      console.log(button);
+  const onButtonClick = (buttonText) => {
+    console.log(buttonText);
+    if (buttonText === "C") {
+      setcalVal("");
+    } else if (buttonText === "=") {
+      try {
+        const result = eval(calVal);
+        setcalVal(result);
+      } catch (error) {
+        setcalVal("ERROR!");
+      }
+    } else {
+      let newdisplayval = calVal + buttonText;
+      setcalVal(newdisplayval);
     }
-    setAllButtons(button);
-    console.log(newvalue);
   };
 
   return (
     <div className={styles.calculator}>
-      <Display></Display>
-      <ButtonsContainer onButtonClick={onButtonClick} ButtonNames = {ButtonNames}></ButtonsContainer>
+      <Display calVal={calVal}></Display>
+      <ButtonsContainer onButtonClick={onButtonClick}></ButtonsContainer>
     </div>
   );
 }
