@@ -1,46 +1,127 @@
-import AppName from "./components/Appname";
-import AddTodo from "./components/AddTodo";
-import ErrorMassage from "./components/ErrorMassage";
-// import ToduItem from "./components/TodoItem";
-import TodoItems from "./components/TodoItems";
+import React, { useState } from "react";
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Box,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./App.css";
-import Container from "./components/Container";
-import { useState } from "react";
 
 function App() {
+  const [todoItems, setTodoItems] = useState([]);
+  const [todoName, setTodoName] = useState("");
+  const [todoDate, setTodoDate] = useState("");
 
-   const [todoItems, setTodoItems] = useState([]);
-
-  // const [todoItems, setTodoItems] = useState([
-  //   { name: "Buy Milk", dueDate: "1/7/2025" },
-  //   { name: "Go To College", dueDate: "1/7/2025" },
-  //   { name: "do something", dueDate: "1/7/2025" },
-  // ]);
-
-
-
-  const handleAddButton = (todoItemName, todoItemDueDate) => {
-    console.log(`newitem added : ${todoItemName} Date : ${todoItemDueDate}`);
-    let newTodo = { name: todoItemName, dueDate: todoItemDueDate }
-    setTodoItems([...todoItems , newTodo])
+  const handleAddButton = () => {
+    if (!todoName || !todoDate) {
+      alert("Please enter both Todo name and date!");
+      return;
+    }
+    const newTodo = { name: todoName, dueDate: todoDate };
+    setTodoItems([...todoItems, newTodo]);
+    setTodoName("");
+    setTodoDate("");
   };
 
-
-  const handleRemove = (todoName, toduDate) => {
-    console.log(`${todoName} is remove from the todo list`);
-    let newTodoItems = todoItems.filter(item => item.name !== todoName)
-    setTodoItems(newTodoItems)
+  const handleRemove = (todoNameToDelete) => {
+    const updatedTodos = todoItems.filter(
+      (item) => item.name !== todoNameToDelete
+    );
+    setTodoItems(updatedTodos);
   };
-
 
   return (
-    <Container>
-    <div className="todo-container">
-      <AppName />
-      <AddTodo handleAddButton={handleAddButton} />
-      {todoItems.length === 0 && <ErrorMassage />}
-      <TodoItems todoItems={todoItems} handleRemove = {handleRemove}></TodoItems>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 5 }}>
+      {/* Header */}
+      <Card sx={{ mb: 3, bgcolor: "#1565c0", color: "#fff" }}>
+        <CardContent>
+          <Typography variant="h4" align="center" fontWeight="bold">
+            TODO APP
+          </Typography>
+        </CardContent>
+      </Card>
+
+      {/* Input Card */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            Add New Todo
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Todo Name"
+                variant="outlined"
+                value={todoName}
+                onChange={(e) => setTodoName(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                type="date"
+                label="Due Date"
+                InputLabelProps={{ shrink: true }}
+                value={todoDate}
+                onChange={(e) => setTodoDate(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={2}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="success"
+                onClick={handleAddButton}
+              >
+                Add
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      {/* Todo List */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          {todoItems.length === 0 ? (
+            <Typography align="center" color="textSecondary">
+              You don't have any task today! Enjoy your day.
+            </Typography>
+          ) : (
+            <List>
+              {todoItems.map((item, index) => (
+                <ListItem
+                  key={index}
+                  secondaryAction={
+                    <IconButton
+                      edge="end"
+                      color="error"
+                      onClick={() => handleRemove(item.name)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemText
+                    primary={item.name}
+                    secondary={Due: ${item.dueDate}}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </CardContent>
+      </Card>
     </Container>
   );
 }
