@@ -35,6 +35,7 @@ function AddTodo({ handleAddButton }) {
         </div>
         <div className="col-4">
           <input
+          className="form-control"
             type="date"
             value={todoItemDueDate}
             onChange={handleDateChange}
