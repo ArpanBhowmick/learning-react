@@ -35,3 +35,50 @@ div.kg-row {   /* have to be specific, div → an element selector and .custom-r
 }
 
 
+
+@media (max-width: 450px) {
+  .msg {
+    font-size: 25px;
+  }
+
+  div.kg-row {
+    flex-direction: row;     /* Stack inputs and buttons vertically */
+    align-items: stretch;
+  }
+
+  .kg-button {
+    width: 100%;                /*Make button full width*/
+    min-width: auto;
+    margin: 0;
+  }
+
+  input {
+    margin: 0;
+    height: 33px;
+  }
+  
+  div.col-6{
+    margin: 0px;
+    padding: 0px;
+  }
+
+  div.col-2 {
+    padding: 0px;
+  }
+
+  div.container.text-center{
+    padding: 0;
+  }
+  
+  button.btn.btn-danger.kg-button {
+    width: 135%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 7px;
+  }
+   button.btn.btn-success.kg-button {
+    width: 120%;
+    margin-left: auto;
+  }
+}
